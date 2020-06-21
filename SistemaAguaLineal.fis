@@ -1,0 +1,50 @@
+[System]
+Name='SistemaAgua'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=10
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Agua'
+Range=[0 60]
+NumMFs=3
+MF1='Frio':'trapmf',[0 0 10 25]
+MF2='Tibio':'trimf',[10 25 45]
+MF3='Caliente':'trapmf',[25 45 60 60]
+
+[Input2]
+Name='Cliente'
+Range=[0 60]
+NumMFs=3
+MF1='frio':'trapmf',[0 0 10 25]
+MF2='Tibio':'trimf',[10 25 45]
+MF3='Caliente':'trapmf',[25 45 60 60]
+
+[Output1]
+Name='Accion'
+Range=[-60 60]
+NumMFs=5
+MF1='Congelar':'trapmf',[-60 -60 -40 -25]
+MF2='Nada':'trapmf',[-25 -5 5 25]
+MF3='Hervir':'trapmf',[25 40 60 60]
+MF4='Enfriar':'trimf',[-40 -25 -5]
+MF5='Calentar':'trimf',[5 25 40]
+
+[Rules]
+1 1, 2 (1) : 1
+3 3, 2 (1) : 1
+1 2, 5 (1) : 1
+1 3, 3 (1) : 1
+2 1, 4 (1) : 1
+2 2, 2 (1) : 1
+2 3, 5 (1) : 1
+3 1, 1 (1) : 1
+3 2, 4 (1) : 1
+3 3, 2 (1) : 1

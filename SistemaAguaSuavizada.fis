@@ -1,0 +1,50 @@
+[System]
+Name='SistemaAguaSuavizada'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=10
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Agua'
+Range=[0 60]
+NumMFs=3
+MF1='Frio':'dsigmf',[36.6 -1.24653739612188 0.366 17.5]
+MF2='Tibio':'gaussmf',[8.281 25.25]
+MF3='Caliente':'dsigmf',[0.275 35 36.6 61.7451523545706]
+
+[Input2]
+Name='Cliente'
+Range=[0 60]
+NumMFs=3
+MF1='frio':'dsigmf',[36.6 -3.2409972299169 0.366 17.5]
+MF2='Tibio':'gaussmf',[8.281 25.25]
+MF3='Caliente':'dsigmf',[0.275 35 36.6 63.5734072022161]
+
+[Output1]
+Name='Accion'
+Range=[-60 60]
+NumMFs=5
+MF1='Congelar':'dsigmf',[18.3 -66.1495844875346 0.366 -32.5]
+MF2='Nada':'gbellmf',[15 3.278 0]
+MF3='Hervir':'dsigmf',[0.366 32.5 18.3 65.4847645429363]
+MF4='Enfriar':'gaussmf',[8.281 -24.75]
+MF5='Calentar':'gaussmf',[6.582 24.75]
+
+[Rules]
+1 1, 2 (1) : 1
+3 3, 2 (1) : 1
+1 2, 5 (1) : 1
+1 3, 3 (1) : 1
+2 1, 4 (1) : 1
+2 2, 2 (1) : 1
+2 3, 5 (1) : 1
+3 1, 1 (1) : 1
+3 2, 4 (1) : 1
+3 3, 2 (1) : 1
